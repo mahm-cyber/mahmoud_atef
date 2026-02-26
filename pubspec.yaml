@@ -18,3 +18,4 @@ dev_dependencies:
 
 jaspr:
   mode: static
+  base: /mahmoud_atef/
