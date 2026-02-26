@@ -40,7 +40,10 @@ jobs:
           npx @tailwindcss/cli -i web/styles.tw.css -o web/styles.css --minify
 
       - name: Build Jaspr static site
-        run: dart run jaspr build
+        run: |
+          dart pub global activate jaspr_cli
+          export PATH="$PATH:$HOME/.pub-cache/bin"
+          jaspr build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
