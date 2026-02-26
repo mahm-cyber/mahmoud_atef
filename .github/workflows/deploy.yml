@@ -36,7 +36,8 @@ jobs:
 
       - name: Build Tailwind CSS
         run: |
-          npx -y @tailwindcss/cli@4 -i web/styles.tw.css -o web/styles.css --minify
+          npm install tailwindcss @tailwindcss/cli
+          npx @tailwindcss/cli -i web/styles.tw.css -o web/styles.css --minify
 
       - name: Build Jaspr static site
         run: dart run jaspr build
