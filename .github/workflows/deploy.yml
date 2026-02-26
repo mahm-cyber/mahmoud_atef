@@ -47,7 +47,17 @@ jobs:
 
       - name: Fix base href for GitHub Pages subpath
         run: |
-          find build/jaspr -name "*.html" -exec sed -i 's|<base href="/">|<base href="/mahmoud_atef/">|g' {} \;
+          python3 -c "
+          import os, re
+          for root, dirs, files in os.walk('build/jaspr'):
+            for fname in files:
+              if fname.endswith('.html'):
+                path = os.path.join(root, fname)
+                content = open(path).read()
+                fixed = re.sub(r'<base\s[^>]*>', '<base href=\"/mahmoud_atef/\">', content, flags=re.DOTALL)
+                open(path, 'w').write(fixed)
+                print('Fixed:', path)
+          "
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
