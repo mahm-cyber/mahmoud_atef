@@ -48,6 +48,9 @@ jobs:
       - name: Copy styles.css into build output
         run: cp web/styles.css build/jaspr/styles.css
 
+      - name: Copy contact.js into build output
+        run: cp web/contact.js build/jaspr/contact.js
+
       - name: Fix base href for GitHub Pages subpath
         run: |
           python3 -c "

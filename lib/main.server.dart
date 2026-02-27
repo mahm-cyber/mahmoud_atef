@@ -52,6 +52,19 @@ void main() {
           tag: 'link',
           attributes: {'rel': 'stylesheet', 'href': 'styles.css'},
         ),
+        // EmailJS SDK
+        Component.element(
+          tag: 'script',
+          attributes: {
+            'src':
+                'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js',
+          },
+        ),
+        // Contact form handler
+        Component.element(
+          tag: 'script',
+          attributes: {'src': 'contact.js', 'defer': ''},
+        ),
       ],
       styles: [
         css('html, body').styles(
@@ -63,6 +76,26 @@ void main() {
             FontFamily('Roboto'),
             FontFamilies.sansSerif,
           ]),
+        ),
+        css('.form-status-success').styles(
+          raw: {
+            'padding': '12px 16px',
+            'border-radius': '8px',
+            'background': '#d1fae5',
+            'color': '#065f46',
+            'font-family': 'Roboto, sans-serif',
+            'font-size': '14px',
+          },
+        ),
+        css('.form-status-error').styles(
+          raw: {
+            'padding': '12px 16px',
+            'border-radius': '8px',
+            'background': '#fee2e2',
+            'color': '#991b1b',
+            'font-family': 'Roboto, sans-serif',
+            'font-size': '14px',
+          },
         ),
       ],
       body: const App(),

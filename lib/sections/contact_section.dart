@@ -1,8 +1,6 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
 
-import '../components/app_button.dart';
-
 class ContactSection extends StatelessComponent {
   const ContactSection({super.key});
 
@@ -27,43 +25,107 @@ class ContactSection extends StatelessComponent {
           ]),
         ]),
         // Form
-        form(classes: 'flex flex-col gap-6', [
-          div(classes: 'grid grid-cols-1 md:grid-cols-2 gap-6', [
-            _inputField('Name', 'Your name'),
-            _inputField('Email', 'Your email'),
-          ]),
-          _inputField('Subject', 'Project subject'),
-          _textArea('Message', 'Tell me about your project...'),
-          div(classes: 'flex justify-center pt-2', [
-            const AppButton(label: 'Send Message'),
-          ]),
-        ]),
+        form(
+          [
+            div(classes: 'grid grid-cols-1 md:grid-cols-2 gap-6', [
+              _inputField(
+                'Name',
+                'Your name',
+                'contact-name',
+                'error-name',
+                'text',
+              ),
+              _inputField(
+                'Email',
+                'Your email',
+                'contact-email',
+                'error-email',
+                'email',
+              ),
+            ]),
+            _inputField(
+              'Subject',
+              'Project subject',
+              'contact-subject',
+              'error-subject',
+              'text',
+            ),
+            _textArea(
+              'Message',
+              'Tell me about your project...',
+              'contact-message',
+              'error-message',
+            ),
+            // Status feedback
+            div(id: 'form-status', attributes: {'style': 'display:none'}, []),
+            div(classes: 'flex justify-center pt-2', [
+              button(
+                [.text('Send Message')],
+                id: 'contact-submit',
+                attributes: {'type': 'submit'},
+                classes:
+                    'inline-block font-roboto font-normal text-body-2 bg-primary '
+                    'text-white rounded px-8 py-3.5 text-center '
+                    'hover:bg-primary-dark transition-colors duration-200 '
+                    'border-none cursor-pointer',
+              ),
+            ]),
+          ],
+          id: 'contact-form',
+          classes: 'flex flex-col gap-6',
+        ),
       ]),
     ]);
   }
 
-  static Component _inputField(String labelText, String placeholder) {
+  static Component _inputField(
+    String labelText,
+    String placeholder,
+    String inputId,
+    String errorId,
+    String inputType,
+  ) {
     return div(classes: 'flex flex-col gap-2', [
-      label([
-        .text(labelText),
-      ], classes: 'font-roboto font-semibold text-body-3 text-heading'),
+      label(
+        [.text(labelText)],
+        htmlFor: inputId,
+        classes: 'font-roboto font-semibold text-body-3 text-heading',
+      ),
       input(
-        type: InputType.text,
+        id: inputId,
+        type: InputType.values.firstWhere(
+          (t) => t.value == inputType,
+          orElse: () => InputType.text,
+        ),
         classes:
             'font-roboto text-body-2 text-body px-4 py-3 rounded-lg '
             'border border-gray-200 bg-white outline-none '
             'focus:border-primary focus:ring-1 focus:ring-primary transition-colors',
         attributes: {'placeholder': placeholder},
       ),
+      div(
+        id: errorId,
+        attributes: {'style': 'display:none'},
+        classes: 'font-roboto text-[13px] text-red-500 mt-0.5',
+        [],
+      ),
     ]);
   }
 
-  static Component _textArea(String labelText, String placeholder) {
+  static Component _textArea(
+    String labelText,
+    String placeholder,
+    String textAreaId,
+    String errorId,
+  ) {
     return div(classes: 'flex flex-col gap-2', [
-      label([
-        .text(labelText),
-      ], classes: 'font-roboto font-semibold text-body-3 text-heading'),
+      label(
+        [.text(labelText)],
+        htmlFor: textAreaId,
+        classes: 'font-roboto font-semibold text-body-3 text-heading',
+      ),
       textarea(
+        id: textAreaId,
         [],
         rows: 5,
         placeholder: placeholder,
@@ -71,6 +133,12 @@ class ContactSection extends StatelessComponent {
             'font-roboto text-body-2 text-body px-4 py-3 rounded-lg '
             'border border-gray-200 bg-white outline-none '
             'focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none',
+      ),
+      div(
+        id: errorId,
+        attributes: {'style': 'display:none'},
+        classes: 'font-roboto text-[13px] text-red-500 mt-0.5',
+        [],
       ),
     ]);
   }
