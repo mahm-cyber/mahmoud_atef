@@ -5,7 +5,7 @@ import '../components/nav_bar.dart';
 import '../sections/hero_section.dart';
 import '../sections/skills_section.dart';
 import '../sections/about_section.dart';
-import '../sections/blog_section.dart';
+import '../sections/projects_section.dart';
 import '../sections/testimonial_section.dart';
 import '../sections/contact_section.dart';
 import '../sections/footer_section.dart';
@@ -20,7 +20,7 @@ class HomePage extends StatelessComponent {
       const HeroSection(),
       const SkillsSection(),
       const AboutSection(),
-      const BlogSection(),
+      const ProjectsSection(),
       const TestimonialSection(),
       const ContactSection(),
       const FooterSection(),

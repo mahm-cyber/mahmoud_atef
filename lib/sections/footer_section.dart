@@ -29,7 +29,7 @@ class FooterSection extends StatelessComponent {
               _footerLink('Home', '#hero'),
               _footerLink('Skills', '#skills'),
               _footerLink('About', '#about'),
-              _footerLink('Blog', '#blog'),
+              _footerLink('Projects', '#projects'),
               _footerLink('Testimonials', '#testimonials'),
               _footerLink('Contact', '#contact'),
             ]),
