@@ -51,6 +51,9 @@ jobs:
       - name: Copy contact.js into build output
         run: cp web/contact.js build/jaspr/contact.js
 
+      - name: Copy CV PDF into build output
+        run: cp web/MAHMOUD_ATEF_CV.pdf build/jaspr/MAHMOUD_ATEF_CV.pdf
+
       - name: Fix base href for GitHub Pages subpath
         run: |
           python3 -c "

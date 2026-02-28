@@ -5,11 +5,13 @@ class AppButton extends StatelessComponent {
   final String label;
   final bool filled;
   final String? href;
+  final String? download;
 
   const AppButton({
     required this.label,
     this.filled = true,
     this.href,
+    this.download,
     super.key,
   });
 
@@ -24,7 +26,9 @@ class AppButton extends StatelessComponent {
     final classes = filled ? filledClasses : outlinedClasses;
 
     if (href != null) {
-      return a(href: href!, classes: classes, [.text(label)]);
+      return a(href: href!, download: download, classes: classes, [
+        .text(label),
+      ]);
     }
     return button(classes: classes, [.text(label)]);
   }
